@@ -1,0 +1,352 @@
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ ./start-all.sh
+🚀 Starting HighLoad Replication Environment...
+📦 Starting PostgreSQL Master...
+[+] Running 2/2
+ ✔ Network highload_pgnet  Created                                                                                              0.3s
+ ✔ Container pgmaster      Started                                                                                              3.2s
+⏳ Waiting for master to be ready...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - accepting connections
+✅ Master is ready!
+🔧 Configuring master for replication...
+🚀 Starting HighLoad Replication Environment...
+📦 Starting PostgreSQL Master...
+[+] Running 1/1
+ ✔ Container pgmaster  Running                                                                                                  0.0s
+⏳ Waiting for master to be ready...
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - accepting connections
+✅ Master is ready!
+🔧 Initializing master configuration...
+✅ Master configuration created
+👤 Creating replication user...
+CREATE ROLE
+✅ Replication user created
+🔍 Checking if replicator user exists...
+            List of roles
+ Role name  | Attributes  | Member of
+------------+-------------+-----------
+ replicator | Replication | {}
+
+🔐 Configuring master authentication...
+✅ Master authentication configured
+[+] Restarting 1/1
+ ✔ Container pgmaster  Started                                                                                                  0.8s
+⏳ Waiting for master to be ready...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - accepting connections
+✅ Master is ready!
+🔄 Creating synchronous replica...
+🔄 Creating replica: pgslave on port 5434
+🔐 Creating .pgpass file...
+📦 Creating base backup...
+pg_basebackup: initiating base backup, waiting for checkpoint to complete
+pg_basebackup: checkpoint completed
+pg_basebackup: write-ahead log start point: 0/2000028 on timeline 1
+pg_basebackup: starting background WAL receiver
+pg_basebackup: created temporary replication slot "pg_basebackup_75"
+   83/30453 kB (0%), 0/1 tablespace (/pgslave/base/1/1247               )
+ 8317/30453 kB (27%), 0/1 tablespace (/pgslave/base/16384/1255           )
+19283/30453 kB (63%), 0/1 tablespace (/pgslave/base/4/2674               )
+25529/30453 kB (83%), 0/1 tablespace (/pgslave/base/5/2617               )
+30463/30463 kB (100%), 0/1 tablespace (/pgslave/global/pg_control         )
+30463/30463 kB (100%), 1/1 tablespace
+pg_basebackup: write-ahead log end point: 0/2000100
+pg_basebackup: waiting for background process to finish streaming ...
+pg_basebackup: syncing data to disk ...
+pg_basebackup: renaming backup_manifest.tmp to backup_manifest
+pg_basebackup: base backup completed
+📋 Copying backup to host...
+Successfully copied 48.2MB to C:\otus-highload\highload\volumes\pgslave
+🔧 Configuring replica...
+📦 Starting PostgreSQL Replica...
+[+] Running 1/1
+ ✔ Container pgslave  Started                                                                                                   0.5s
+⏳ Waiting for master to be ready...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - accepting connections
+📊 Checking replication status...
+ pid |  status   | receive_start_lsn | receive_start_tli | written_lsn | flushed_lsn | received_tli |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |        latest_end_time        | slot_name | sender_host | sender_port |
+
+ conninfo
+
+-----+-----------+-------------------+-------------------+-------------+-------------+--------------+-------------------------------+-------------------------------+----------------+-------------------------------+-----------+-------------+-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 101 | streaming | 0/3000000         |                 1 | 0/302BC80   | 0/302BC80   |            1 | 2025-12-27 16:05:43.650608+00 | 2025-12-27 16:05:43.917696+00 | 0/302BC80      | 2025-12-27 16:05:43.650198+00 |           | pgmaster    |        5432 | user=replicator password=******** channel_binding=prefer dbname=replication host=pgmaster port=5432 application_name=pgslave fallback_application_name=walreceiver sslmode=prefer sslcompression=0 sslsni=1 ssl_min_protocol_version=TLSv1.2 gssencmode=prefer krbsrvname=postgres target_session_attrs=any
+(1 row)
+
+✅ Replica pgslave is ready!
+🔄 Creating asynchronous replica...
+🔄 Creating replica: pgasyncslave on port 5435
+🔐 Creating .pgpass file...
+📦 Creating base backup...
+pg_basebackup: initiating base backup, waiting for checkpoint to complete
+pg_basebackup: checkpoint completed
+pg_basebackup: write-ahead log start point: 0/4000028 on timeline 1
+pg_basebackup: starting background WAL receiver
+pg_basebackup: created temporary replication slot "pg_basebackup_153"
+   83/30525 kB (0%), 0/1 tablespace (/pgasyncslave/base/1/1247          )
+ 4301/30525 kB (14%), 0/1 tablespace (/pgasyncslave/base/1/2673          )
+12379/30525 kB (40%), 0/1 tablespace (/pgasyncslave/base/16384/2690      )
+22535/30525 kB (73%), 0/1 tablespace (/pgasyncslave/base/5/1247          )
+29662/30525 kB (97%), 0/1 tablespace (/pgasyncslave/base/5/3766          )
+30535/30535 kB (100%), 0/1 tablespace (/pgasyncslave/global/pg_control    )
+30535/30535 kB (100%), 1/1 tablespace
+pg_basebackup: write-ahead log end point: 0/4000138
+pg_basebackup: waiting for background process to finish streaming ...
+pg_basebackup: syncing data to disk ...
+pg_basebackup: renaming backup_manifest.tmp to backup_manifest
+pg_basebackup: base backup completed
+📋 Copying backup to host...
+Successfully copied 48.2MB to C:\otus-highload\highload\volumes\pgasyncslave
+🔧 Configuring replica...
+📦 Starting PostgreSQL Replica...
+[+] Running 1/1
+ ✔ Container pgasyncslave  Started                                                                                                                                      0.5s
+⏳ Waiting for master to be ready...
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - no response
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - rejecting connections
+/var/run/postgresql:5432 - accepting connections
+📊 Checking replication status...
+ pid |  status   | receive_start_lsn | receive_start_tli | written_lsn | flushed_lsn | received_tli |      last_msg_send_time       |     last_msg_receipt_time     | latest_end_lsn |       latest_end_time        | slot_name | sender_host | sender_port |
+                                                        conninfo
+
+-----+-----------+-------------------+-------------------+-------------+-------------+--------------+-------------------------------+-------------------------------+----------------+------------------------------+-----------+-------------+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 107 | streaming | 0/3000000         |                 1 | 0/5000060   | 0/5000060   |            1 | 2025-12-27 16:06:27.582376+00 | 2025-12-27 16:06:27.737165+00 | 0/5000060      | 2025-12-27 16:06:26.70089+00 |           | pgmaster    |        5432 | user=replicator password=******** channel_binding=prefer dbname=replication host=pgmaster port=5432 application_name=pgasyncslave fallback_application_name=walreceiver sslmode=prefer sslcompression=0 sslsni=1 ssl_min_protocol_version=TLSv1.2 gssencmode=prefer krbsrvname=postgres target_session_attrs=any
+(1 row)
+
+✅ Replica pgasyncslave is ready!
+⚡ Setting up synchronous replication...
+⚡ Setting up synchronous replication...
+You are now connected to database "social_network" as user "postgres".
+ALTER SYSTEM
+ALTER SYSTEM
+ pg_reload_conf
+----------------
+ t
+(1 row)
+
+           name            | setting
+---------------------------+---------
+ synchronous_commit        | on
+ synchronous_standby_names |
+(2 rows)
+
+✅ Synchronous replication configured
+⚡ Setting up synchronous replication...
+⚡ Generate users, create index...
+You are now connected to database "social_network" as user "postgres".
+CREATE TABLE
+ERROR:  invalid input syntax for type interval: "1.7023396442494843e-05 days"
+CREATE EXTENSION
+CREATE INDEX
+✅ Data added
+🚀 Starting all services...
+[+] Running 13/13
+ ✔ Network highload_default         Created                                                                                                                             0.0s
+ ✔ Volume highload_prometheus_data  Created                                                                                                                             0.0s
+ ✔ Volume highload_grafana_data     Created                                                                                                                             0.0s
+ ✔ Container prometheus             Started                                                                                                                             0.7s
+ ✔ Container pgslave                Running                                                                                                                             0.0s
+ ✔ Container pgmaster               Healthy                                                                                                                             0.7s
+ ✔ Container grafana                Started                                                                                                                             0.6s
+ ✔ Container pgasyncslave           Running                                                                                                                             0.0s
+ ✔ Container pgslave-exporter       Started                                                                                                                             0.8s
+ ✔ Container node-exporter          Started                                                                                                                             0.7s
+ ✔ Container pgasyncslave-exporter  Started                                                                                                                             0.6s
+ ✔ Container pgmaster-exporter      Started                                                                                                                             0.7s
+ ✔ Container app                    Started                                                                                                                             1.0s
+✅ All services started!
+
+📊 Services:
+  PostgreSQL Master:     localhost:5433
+  PostgreSQL Sync Slave: localhost:5434
+  PostgreSQL Async Slave: localhost:5435
+  Spring Boot App:       http://localhost:8080
+  Prometheus:            http://localhost:9090
+  Grafana:               http://localhost:3000 (admin/admin)
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ docker stop pgmaster pgmaster-exporter
+pgmaster
+pgmaster-exporter
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ ./promote-slave.sh
+👑 Promoting slave pgslave to master...
+ pg_promote
+------------
+ t
+(1 row)
+
+ pg_is_in_recovery
+-------------------
+ f
+(1 row)
+
+✅ Slave pgslave promoted to master!
+⚠️ Don't forget to reconfigure other slaves to follow the new master!
+🔧 Configuring replica...
+You are now connected to database "social_network" as user "postgres".
+ pg_reload_conf
+----------------
+ t
+(1 row)
+
+           name            | setting
+---------------------------+---------
+ synchronous_commit        | on
+ synchronous_standby_names |
+(2 rows)
+
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ ./diagnose-replication.sh
+
+1. Checking database statistics on each node:
+--------------------------------------------
+
+📊 pgslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |         374 |             0 |           1 |
+(1 row)
+
+
+📊 pgasyncslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |         368 |             0 |           1 |
+(1 row)
+
+
+2. Checking replication status:
+-------------------------------
+✅ Current master: pgslave
+ application_name | client_addr | state | sync_state | lag_bytes
+------------------+-------------+-------+------------+-----------
+(0 rows)
+
+
+3. Testing with new data:
+-------------------------
+Creating test data on pgslave...
+CREATE TABLE
+INSERT 0 1
+Checking replicas...
+
+📊 pgasyncslave:
+Table not found
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ ./diagnose-replication.sh
+
+1. Checking database statistics on each node:
+--------------------------------------------
+
+📊 pgslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |         387 |             0 |           1 |
+(1 row)
+
+
+📊 pgasyncslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |         379 |             0 |           1 |
+(1 row)
+
+
+2. Checking replication status:
+-------------------------------
+✅ Current master: pgslave
+ application_name | client_addr | state | sync_state | lag_bytes
+------------------+-------------+-------+------------+-----------
+(0 rows)
+
+
+3. Testing with new data:
+-------------------------
+Creating test data on pgslave...
+NOTICE:  relation "replication_diagnosis" already exists, skipping
+CREATE TABLE
+INSERT 0 1
+Checking replicas...
+
+📊 pgasyncslave:
+Table not found
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ docker restart pgasyncslave
+pgasyncslave
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
+$ ./diagnose-replication.sh
+
+1. Checking database statistics on each node:
+--------------------------------------------
+
+📊 pgslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |         452 |             0 |           1 |
+(1 row)
+
+
+📊 pgasyncslave:
+    datname     | xact_commit | xact_rollback | numbackends | stats_reset
+----------------+-------------+---------------+-------------+-------------
+ social_network |          16 |             0 |           1 |
+(1 row)
+
+
+2. Checking replication status:
+-------------------------------
+✅ Current master: pgslave
+ application_name | client_addr |   state   | sync_state | lag_bytes
+------------------+-------------+-----------+------------+-----------
+ pgasyncslave     | 172.18.0.2  | streaming | async      |         0
+(1 row)
+
+
+3. Testing with new data:
+-------------------------
+Creating test data on pgslave...
+NOTICE:  relation "replication_diagnosis" already exists, skipping
+CREATE TABLE
+INSERT 0 1
+Checking replicas...
+
+📊 pgasyncslave:
+ id |     source     |         created_at
+----+----------------+----------------------------
+  3 | diagnosis_test | 2025-12-27 16:17:44.042947
+(1 row)
+
+
+Мария@DESKTOP-1LF3HJV MINGW64 /c/otus-highload/highload/scripts (main)
