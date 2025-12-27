@@ -59,3 +59,6 @@ Test Plan JMeter ![Plan JMeter](Test Plan.jmx)
 Результат ![Kill master](load-replicas/write-kill-master.png)
 
 Если обратно поднимать оригинальный мсастер, то будет split-brain master, в таком случае нужен failover (patroni, например)
+
+
+Пример лога из терминала ![Log](load-replicas/example=log.txt)
